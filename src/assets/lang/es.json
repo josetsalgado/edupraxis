@@ -1363,7 +1363,7 @@
     "core.login.checksiteversion": "Comprueba que tu sitio utiliza Moodle 2.4 o superior.",
     "core.login.confirmdeletesite": "¿Está seguro de que quiere eliminar el sitio {{sitename}}?",
     "core.login.connect": "Conectar",
-    "core.login.connecttomoodle": "Conectar a Moodle",
+    "core.login.connecttomoodle": "Conectar a Moodle", 
     "core.login.contactyouradministrator": "Contacte a su administrador del sitio para más ayuda.",
     "core.login.contactyouradministratorissue": "Por favor, pídale al administrador que revise el siguiente problema: {{$a}}",
     "core.login.createaccount": "Crear cuenta",

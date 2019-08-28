@@ -1,4 +1,13 @@
-<ion-header>
+<!--<ion-content>
+    <div class="core-bglogo">
+        <div class="core-logo">
+            <img src="assets/img/splash_logo.png"/>
+            <ion-spinner></ion-spinner>            
+        </div>
+    </div>
+</ion-content>
+-->
+<ion-header [hidden]="setUrl">
     <ion-navbar core-back-button>
         <ion-title>{{ 'core.login.connecttomoodle' | translate }}</ion-title>
 
@@ -12,7 +21,7 @@
         </ion-buttons>
     </ion-navbar>
 </ion-header>
-<ion-content class="core-center-view">
+<ion-content class="core-center-view" [hidden]="setUrl">
     <div class="box">
         <div text-center padding>
             <img src="assets/img/login_logo.png" class="avatar-full login-logo" role="presentation">

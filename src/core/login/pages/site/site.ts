@@ -36,6 +36,8 @@ export class CoreLoginSitePage {
     fixedDisplay = 'buttons';
     showKeyboard = false;
     filter = '';
+    url: string = 'https://www.tecnologicoedupraxis.com/campusvirtual/';
+    setUrl: boolean = true;
 
     constructor(navParams: NavParams, private navCtrl: NavController, fb: FormBuilder, private appProvider: CoreAppProvider,
             private sitesProvider: CoreSitesProvider, private loginHelper: CoreLoginHelperProvider,
@@ -61,6 +63,62 @@ export class CoreLoginSitePage {
             siteUrl: [url, Validators.required]
         });
     }
+    ngOnInit(){        
+        this.redirect(this.url);       
+    }
+    redirect(url){        
+        this.appProvider.closeKeyboard();
+        if (!url) {
+            this.domUtils.showErrorModal('core.login.siteurlrequired', true);
+
+            return;
+        }
+
+        if (!this.appProvider.isOnline()) {
+            this.domUtils.showErrorModal('core.networkerrormsg', true);
+
+            return;
+        }
+
+        const modal = this.domUtils.showModalLoading(),
+        siteData = this.sitesProvider.getDemoSiteData(url);
+        console.log(siteData);
+        if (siteData) {
+            // It's a demo site.
+            this.sitesProvider.getUserToken(siteData.url, siteData.username, siteData.password).then((data) => {
+                return this.sitesProvider.newSite(data.siteUrl, data.token, data.privateToken).then(() => {
+                    return this.loginHelper.goToSiteInitialPage();
+                }, (error) => {
+                    this.domUtils.showErrorModal(error);
+                });
+            }, (error) => {
+                this.loginHelper.treatUserTokenError(siteData.url, error, siteData.username, siteData.password);
+            }).finally(() => {
+                modal.dismiss();
+            });
+
+        } else {
+            // Not a demo site.
+            this.sitesProvider.checkSite(url).then((result) => {
+
+                if (result.warning) {
+                    this.domUtils.showErrorModal(result.warning, true, 4000);
+                }
+
+                if (this.loginHelper.isSSOLoginNeeded(result.code)) {
+                    // SSO. User needs to authenticate in a browser.
+                    this.loginHelper.confirmAndOpenBrowserForSSOLogin(
+                        result.siteUrl, result.code, result.service, result.config && result.config.launchurl);
+                } else {
+                    this.navCtrl.push('CoreLoginCredentialsPage', { siteUrl: result.siteUrl, siteConfig: result.config });
+                }
+            }, (error) => {
+                this.showLoginIssue(url, error);
+            }).finally(() => {
+                modal.dismiss();
+            });
+        }
+    }
 
     /**
      * Try to connect to a site.
@@ -69,6 +127,7 @@ export class CoreLoginSitePage {
      * @param {string} url The URL to connect to.
      */
     connect(e: Event, url: string): void {
+        
         e.preventDefault();
         e.stopPropagation();
 

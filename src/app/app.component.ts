@@ -71,7 +71,7 @@ export class MoodleMobileApp implements OnInit {
     /**
      * Component being initialized.
      */
-    ngOnInit(): void {
+    ngOnInit(): void {        
         this.eventsProvider.on(CoreEventsProvider.LOGOUT, () => {
             // Go to sites page when user is logged out.
             this.appProvider.getRootNavController().setRoot('CoreLoginSitesPage');
