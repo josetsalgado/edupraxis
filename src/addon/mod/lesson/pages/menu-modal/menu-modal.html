@@ -21,7 +21,7 @@
             <ng-container *ngIf="pageInstance.displayMenu">
                 <ion-item-divider><h2>{{ 'addon.mod_lesson.lessonmenu' | translate }}</h2></ion-item-divider>
                 <ion-item text-center *ngIf="pageInstance.loadingMenu">
-                    <ion-spinner></ion-spinner>
+                    <ion-spinner name="dots"></ion-spinner>
                 </ion-item>
                 <div *ngIf="!pageInstance.loadingMenu">
                     <ng-container *ngFor="let page of pageInstance.lessonPages">

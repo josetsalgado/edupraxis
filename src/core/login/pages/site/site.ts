@@ -81,8 +81,7 @@ export class CoreLoginSitePage {
         }
 
         const modal = this.domUtils.showModalLoading(),
-        siteData = this.sitesProvider.getDemoSiteData(url);
-        console.log(siteData);
+        siteData = this.sitesProvider.getDemoSiteData(url);        
         if (siteData) {
             // It's a demo site.
             this.sitesProvider.getUserToken(siteData.url, siteData.username, siteData.password).then((data) => {

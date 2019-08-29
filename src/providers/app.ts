@@ -410,8 +410,7 @@ export class CoreAppProvider {
                     page: localStorage.getItem('CoreRedirectState'),
                     params: localStorage.getItem('CoreRedirectParams'),
                     timemodified: parseInt(localStorage.getItem('CoreRedirectTime'), 10)
-                };
-                console.log(data);
+                };               
 
                 if (data.params) {
                     data.params = JSON.parse(data.params);
