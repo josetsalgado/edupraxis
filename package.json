@@ -154,7 +154,10 @@
       "cordova-plugin-badge": {},
       "cordova-plugin-camera": {},
       "cordova-plugin-customurlscheme": {
-        "URL_SCHEME": "moodlemobile"
+        "URL_SCHEME": "moodlemobile",
+        "ANDROID_SCHEME": " ",
+        "ANDROID_HOST": " ",
+        "ANDROID_PATHPREFIX": "/"
       },
       "cordova-plugin-device": {},
       "cordova-plugin-file": {},
@@ -163,7 +166,9 @@
       "cordova-plugin-globalization": {},
       "cordova-plugin-inappbrowser": {},
       "cordova-plugin-ionic-keyboard": {},
-      "cordova-plugin-local-notification": {},
+      "cordova-plugin-local-notification": {
+        "ANDROID_SUPPORT_V4_VERSION": "26.+"
+      },
       "cordova-plugin-media-capture": {},
       "cordova-plugin-network-information": {},
       "cordova-plugin-screen-orientation": {},
